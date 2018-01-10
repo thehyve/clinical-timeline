@@ -132,7 +132,7 @@ var clinicalTimeline = (function(){
     svg.insert("text")
       .attr("transform", "translate(0, 15)")
       .attr("class", "timeline-label")
-      .text("Time since diagnosis");
+      .text("Time since grafting");
     d3.select(divId+" .axis").attr("transform", "translate(0,20)");
 
     // preserve whitespace for easy indentation of labels
@@ -425,7 +425,15 @@ var clinicalTimeline = (function(){
           {
             "aTargets": [ 1 ],
             "sClass": "left-align-td",
-            "bSortable": false
+            "bSortable": false,
+            "mRender": function ( data, type, full ) {
+        	if (full[0].toUpperCase().indexOf("FILE") != -1) {
+        	    return '<img style="display:block; width:120px;height:120px;" src="'+data+'"/>';
+        	}
+        	else {
+        	    return data;
+        	}
+             }
           }
         ],
         "fnDrawCallback": function ( oSettings ) {
